@@ -11,23 +11,28 @@
 
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     height: 100vh;
+    margin: 0;
     background: rgb(0,0,0);
     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(2,9,101,1) 52%, rgba(3,19,208,1) 100%);
     background-attachment: fixed;
-    flex-direction: column;
     overflow-y: auto;
 }
 
+
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: rgb(0,0,0);
     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(2,9,101,1) 52%, rgba(3,19,208,1) 100%);
     border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 35px;
-    margin-top: -450px;
     width: 60%;
     flex-shrink: 0; /* flex-shrink fixe la taille du container comme elle est */
 }
@@ -88,10 +93,11 @@ input[type="text"] {
 .span-rta {
     display: inline-block;
     width: 100%;
+    font-size: 25px;
 }
 
 .btn1:hover .span-rta {
-    animation: rotation .5s forwards;
+    animation: rotation .5s forwards ease-in-out;
 }
 
 @keyframes rotation {
@@ -103,48 +109,61 @@ input[type="text"] {
     }
 }
 
+.movie-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 800px;
+    margin-top: 30px;
+}
+  
+  
 .movie-card {
-    width: 300px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin-bottom: 20px;
+  width: 300px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .movie-poster {
-    width: 100%;
-    border-radius: 4px;
-    margin-bottom: 8px;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.movie-details {
+  padding: 10px;
 }
 
 .movie-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 8px;
+  font-size: 20px;
+  margin-bottom: 5px;
 }
 
 .movie-year {
-    font-size: 16px;
-    color: #888;
-    margin-bottom: 8px;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 5px;
 }
 
 .movie-plot {
-    font-size: 16px;
-    margin-bottom: 12px;  
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .read-more {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
+  display: block;
+  text-align: center;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
 .read-more:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
