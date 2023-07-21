@@ -82,7 +82,7 @@ const showMoviePop = (poster, title, year, plot) => {
     document.body.appendChild(popup);
 };
 
-const observer = new IntersectionObserver(showMovieCard, options);
+
 const showMovieCard = (entries, observer) => { // utilisation de l'intersection observer
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -98,3 +98,4 @@ const options = {
     rootMargin: '0px',
     threshold: 0.8//reglage timing visibiliter
 };
+const observer = new IntersectionObserver(showMovieCard, options);
