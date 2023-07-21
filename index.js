@@ -10,8 +10,8 @@ const searchMovies = movieName => {
             const listElement = document.getElementById("movieList");
             listElement.innerHTML = "";
             allMovieData = data.Search;
-                allMovieData.forEach(({ Poster, Title, Year, Plot }) => {
-                    showAllMovie(listElement, Poster, Title, Year, Plot);
+                allMovieData.forEach((movie, i)=> {
+                    showAllMovie(listElement, movie.Poster, movie.Title, movie.Year, movie.Plot, i);
                 });
             } 
             else {
@@ -33,10 +33,17 @@ const searchForm = document.getElementById("searchForm");
 });
   
 
-const showAllMovie = (element, poster, title, year, plot) => {
+const showAllMovie = (element, poster, title, year, plot, i) => {
+    let classChoice;
+    if (i % 2 === 0) {
+      classChoice = "bounce-right";
+    } 
+    else {
+      classChoice = "bounce-left";
+    }
     const card = document.createElement("div");
-    card.classList.add('movie-card');
-  
+    card.classList.add("movie-card", "hidden", classChoice);
+
     card.innerHTML = `
       <img src="${poster}" alt="${title}" class="movie-poster" />
       <div class="movie-details">
@@ -46,13 +53,15 @@ const showAllMovie = (element, poster, title, year, plot) => {
         <a href="#" class="read-more">Afficher plus</a>
       </div>
     `;
-    
+
     const readMoreBtn = card.querySelector(".read-more");
     readMoreBtn.addEventListener("click", () => {
         showMoviePop(poster, title, year, plot);
-    })
+    });
+    observer.observe(card);
     element.appendChild(card);
 };
+
 
 const showMoviePop = (poster, title, year, plot) => {
     const popup = document.createElement("div");
@@ -70,7 +79,24 @@ const showMoviePop = (poster, title, year, plot) => {
     removePopup.addEventListener("click", () => {
         popup.remove();
     })
-
     document.body.appendChild(popup);
 };
 
+
+const showMovieCard = (entries, observer) => { // utilisation de l'intersection observer
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.remove("hidden");
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+        }
+    });
+};
+
+const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.8//reglage timing visibiliter
+};
+
+const observer = new IntersectionObserver(showMovieCard, options);
