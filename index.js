@@ -15,7 +15,7 @@ const searchMovies = movieName => {
                 });
             } 
             else {
-            console.log("Aucun film trouvé.");
+            console.log("Aucune data de film trouvé.");
             }
         })
         .catch(error => {
@@ -34,7 +34,7 @@ const searchForm = document.getElementById("searchForm");
   
 
 const showAllMovie = (element, poster, title, year, plot) => {
-    const card = document.createElement('div');
+    const card = document.createElement("div");
     card.classList.add('movie-card');
   
     card.innerHTML = `
@@ -43,10 +43,34 @@ const showAllMovie = (element, poster, title, year, plot) => {
         <h2 class="movie-title">Titre : ${title}</h2>
         <p class="movie-year">Annee de sortie: ${year}</p>
         <p class="movie-plot">Synopsis: ${plot}</p>
-        <a href="#" class="read-more">Read more</a>
+        <a href="#" class="read-more">Afficher plus</a>
       </div>
     `;
-  
+    
+    const readMoreBtn = card.querySelector(".read-more");
+    readMoreBtn.addEventListener("click", () => {
+        showMoviePop(poster, title, year, plot);
+    })
     element.appendChild(card);
+};
+
+const showMoviePop = (poster, title, year, plot) => {
+    const popup = document.createElement("div");
+    popup.classList.add("movie-popup");
+
+    popup.innerHTML = `
+        <img src="${poster}" alt="${title}" class="movie-poster" />
+        <h2 class="popup-title">${title}</h2>
+        <p class="popup-year">Annee de sortie: ${year}</p>
+        <p class="popup-plot">Synopsis: ${plot}</p>
+        <button class="close-popup">Fermer</button
+    `;
+
+    const removePopup = popup.querySelector(".close-popup");
+    removePopup.addEventListener("click", () => {
+        popup.remove();
+    })
+
+    document.body.appendChild(popup);
 };
 
